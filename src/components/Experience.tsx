@@ -8,14 +8,14 @@ const experiences = [
         title: "Team Leader & Branch Store Manager",
         company: "Comedya Store, Egypt",
         period: "2023 – Jan 2026",
-       description: [
-  "Managed daily operations of a mobile retail branch, ensuring smooth workflow and high service quality.",
-  "Led and trained the sales team to achieve monthly targets and improve performance.",
-  "Assisted customers in choosing smartphones, accessories, and services based on their needs.",
-  "Handled inventory management, stock ordering, and loss prevention.",
-  "Resolved customer issues professionally, increasing satisfaction and repeat business.",
-  "Tracked sales and prepared reports to support business growth and decision-making.",
-],
+        description: [
+            "Managed daily operations of a mobile retail branch, ensuring smooth workflow and high service quality.",
+            "Led and trained the sales team to achieve monthly targets and improve performance.",
+            "Assisted customers in choosing smartphones, accessories, and services based on their needs.",
+            "Handled inventory management, stock ordering, and loss prevention.",
+            "Resolved customer issues professionally, increasing satisfaction and repeat business.",
+            "Tracked sales and prepared reports to support business growth and decision-making.",
+        ],
     },
     {
         title: "Team Leader & Branch Store Manager",
@@ -55,47 +55,65 @@ const experiences = [
 
 export default function Experience() {
     return (
-        <section id="experience" className="py-20 bg-card/30">
-            <div className="container mx-auto px-6">
+        <section id="experience" className="py-20 relative bg-background">
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent pointer-events-none" />
+            <div className="container mx-auto px-6 relative z-10">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
                     viewport={{ once: true }}
-                    className="text-center mb-12"
+                    className="text-center mb-16"
                 >
-                    <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                    <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
                         Professional <span className="text-secondary">Experience</span>
                     </h2>
                 </motion.div>
 
-                <div className="max-w-4xl mx-auto space-y-8">
+                <div className="max-w-5xl mx-auto space-y-8 relative">
+                    {/* Vertical Line */}
+                    <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-white/20 to-transparent hidden md:block"></div>
+
                     {experiences.map((exp, index) => (
                         <motion.div
                             key={index}
-                            initial={{ opacity: 0, x: -20 }}
+                            initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
                             whileInView={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.5, delay: index * 0.1 }}
+                            transition={{ duration: 0.6, delay: index * 0.1 }}
                             viewport={{ once: true }}
-                            className="bg-card p-6 rounded-xl border border-white/5 hover:border-secondary/50 transition-colors"
+                            className={`flex flex-col md:flex-row gap-8 items-center ${index % 2 === 0 ? "md:flex-row-reverse" : ""
+                                }`}
                         >
-                            <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
-                                <div>
-                                    <h3 className="text-xl font-bold text-white flex items-center gap-2">
-                                        <Briefcase size={20} className="text-secondary" />
-                                        {exp.title}
-                                    </h3>
-                                    <p className="text-secondary font-medium">{exp.company}</p>
+                            <div className="w-full md:w-1/2">
+                                <div className="glass-card p-8 rounded-2xl md:text-left relative group hover:border-secondary/30 transition-all duration-300">
+                                    <div className={`absolute top-1/2 -translate-y-1/2 w-4 h-4 bg-secondary rounded-full hidden md:block ${index % 2 === 0 ? "-right-[42px]" : "-left-[42px]"
+                                        }`}>
+                                        <div className="absolute inset-0 bg-secondary rounded-full animate-ping opacity-50"></div>
+                                    </div>
+
+                                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 border-b border-white/5 pb-4">
+                                        <div>
+                                            <h3 className="text-xl font-bold text-white flex items-center gap-2">
+                                                <Briefcase size={20} className="text-secondary" />
+                                                {exp.title}
+                                            </h3>
+                                            <p className="text-gray-300 font-medium mt-1">{exp.company}</p>
+                                        </div>
+                                        <span className="text-secondary bg-secondary/10 px-4 py-1.5 rounded-full text-sm font-bold whitespace-nowrap border border-secondary/20">
+                                            {exp.period}
+                                        </span>
+                                    </div>
+                                    <ul className="space-y-3 text-gray-400">
+                                        {exp.description.map((item, i) => (
+                                            <li key={i} className="flex items-start gap-2 text-sm leading-relaxed">
+                                                <span className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0" />
+                                                {item}
+                                            </li>
+                                        ))}
+                                    </ul>
                                 </div>
-                                <span className="text-gray-400 bg-white/5 px-3 py-1 rounded-full text-sm w-fit">
-                                    {exp.period}
-                                </span>
                             </div>
-                            <ul className="list-disc list-inside space-y-2 text-gray-300">
-                                {exp.description.map((item, i) => (
-                                    <li key={i}>{item}</li>
-                                ))}
-                            </ul>
+                            <div className="hidden md:block w-1/2" />
                         </motion.div>
                     ))}
                 </div>

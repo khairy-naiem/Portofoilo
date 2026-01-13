@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Github, Linkedin, Mail, Send } from "lucide-react";
 import { FaFacebook, FaInstagram, FaWhatsapp } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 const ContactSection = () => {
     const [formData, setFormData] = useState({
@@ -64,148 +65,128 @@ const ContactSection = () => {
     };
 
     return (
-        <section id="contact" className="py-5 relative">
-            <div className="container mx-auto px-6">
-                <div className="max-w-2xl mx-auto">
-                    <h2 className="text-3xl font-bold text-foreground mb-4 text-center">
-                        Get In Touch
-                    </h2>
+        <section id="contact" className="py-24 relative overflow-hidden bg-background">
+            <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-secondary/5 rounded-full blur-[120px] pointer-events-none"></div>
 
-                    <p className="text-muted-foreground text-center mb-12">
-                        I'm currently looking for new opportunities. My inbox is always
-                        open!
-                    </p>
+            <div className="container mx-auto px-6 relative z-10">
+                <div className="max-w-4xl mx-auto">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5 }}
+                        viewport={{ once: true }}
+                        className="text-center mb-16"
+                    >
+                        <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
+                            Get In <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-primary">Touch</span>
+                        </h2>
+                        <p className="text-gray-400 text-lg">
+                            I'm currently looking for new opportunities. My inbox is always open!
+                        </p>
+                    </motion.div>
 
-                    <form onSubmit={handleSubmit} className="space-y-6">
-                        <div className="grid md:grid-cols-2 gap-6">
-                            <div>
-                                <label
-                                    htmlFor="name"
-                                    className="block text-sm font-medium text-foreground mb-2"
-                                >
-                                    Full Name
-                                </label>
+                    <div className="glass-card p-8 md:p-12 rounded-3xl shadow-2xl border border-white/5">
+                        <form onSubmit={handleSubmit} className="space-y-8">
+                            <div className="grid md:grid-cols-2 gap-8">
+                                <div className="space-y-2">
+                                    <label htmlFor="name" className="text-sm font-medium text-gray-300 ml-1">Full Name</label>
+                                    <input
+                                        type="text"
+                                        id="name"
+                                        name="name"
+                                        value={formData.name}
+                                        onChange={handleChange}
+                                        required
+                                        className="w-full px-6 py-4 bg-black/20 border border-white/10 rounded-2xl text-white placeholder:text-gray-600 focus:outline-none focus:border-secondary/50 focus:bg-black/40 transition-all font-light"
+                                        placeholder="John Doe"
+                                    />
+                                </div>
+
+                                <div className="space-y-2">
+                                    <label htmlFor="email" className="text-sm font-medium text-gray-300 ml-1">Email Address</label>
+                                    <input
+                                        type="email"
+                                        id="email"
+                                        name="email"
+                                        value={formData.email}
+                                        onChange={handleChange}
+                                        required
+                                        className="w-full px-6 py-4 bg-black/20 border border-white/10 rounded-2xl text-white placeholder:text-gray-600 focus:outline-none focus:border-secondary/50 focus:bg-black/40 transition-all font-light"
+                                        placeholder="john@example.com"
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="space-y-2">
+                                <label htmlFor="phone" className="text-sm font-medium text-gray-300 ml-1">Phone Number (Optional)</label>
                                 <input
-                                    type="text"
-                                    id="name"
-                                    name="name"
-                                    value={formData.name}
+                                    type="tel"
+                                    id="phone"
+                                    name="phone"
+                                    value={formData.phone}
                                     onChange={handleChange}
-                                    required
-                                    className="w-full px-4 py-3 bg-card border border-border rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
-                                    placeholder="Your name"
+                                    className="w-full px-6 py-4 bg-black/20 border border-white/10 rounded-2xl text-white placeholder:text-gray-600 focus:outline-none focus:border-secondary/50 focus:bg-black/40 transition-all font-light"
+                                    placeholder="+1 234 567 890"
                                 />
                             </div>
 
-                            <div>
-                                <label
-                                    htmlFor="email"
-                                    className="block text-sm font-medium text-foreground mb-2"
-                                >
-                                    Email
-                                </label>
-                                <input
-                                    type="email"
-                                    id="email"
-                                    name="email"
-                                    value={formData.email}
+                            <div className="space-y-2">
+                                <label htmlFor="message" className="text-sm font-medium text-gray-300 ml-1">Your Message</label>
+                                <textarea
+                                    id="message"
+                                    name="message"
+                                    value={formData.message}
                                     onChange={handleChange}
                                     required
-                                    className="w-full px-4 py-3 bg-card border border-border rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
-                                    placeholder="your@email.com"
+                                    rows={5}
+                                    className="w-full px-6 py-4 bg-black/20 border border-white/10 rounded-2xl text-white placeholder:text-gray-600 focus:outline-none focus:border-secondary/50 focus:bg-black/40 transition-all font-light resize-none"
+                                    placeholder="Hello, I'd like to discuss..."
                                 />
                             </div>
-                        </div>
 
-                        <div>
-                            <label
-                                htmlFor="phone"
-                                className="block text-sm font-medium text-foreground mb-2"
+                            <button
+                                type="submit"
+                                disabled={isSubmitting}
+                                className="w-full md:w-auto md:px-12 py-4 bg-gradient-to-r from-primary to-secondary text-white font-bold rounded-xl shadow-[0_0_20px_rgba(139,92,246,0.3)] hover:shadow-[0_0_30px_rgba(139,92,246,0.5)] hover:scale-[1.02] transition-all disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-3 mx-auto"
                             >
-                                Phone (Optional)
-                            </label>
-                            <input
-                                type="tel"
-                                id="phone"
-                                name="phone"
-                                value={formData.phone}
-                                onChange={handleChange}
-                                className="w-full px-4 py-3 bg-card border border-border rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
-                                placeholder="+1 234 567 890"
-                            />
-                        </div>
-
-                        <div>
-                            <label
-                                htmlFor="message"
-                                className="block text-sm font-medium text-foreground mb-2"
-                            >
-                                Message
-                            </label>
-                            <textarea
-                                id="message"
-                                name="message"
-                                value={formData.message}
-                                onChange={handleChange}
-                                required
-                                rows={5}
-                                className="w-full px-4 py-3 bg-card border border-border rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors resize-none"
-                                placeholder="Your message..."
-                            />
-                        </div>
-
-                        <button
-                            type="submit"
-                            disabled={isSubmitting}
-                            className="w-full flex items-center justify-center gap-2 px-8 py-4 bg-primary text-primary-foreground font-semibold rounded-xl glow hover:scale-[1.02] transition-transform disabled:opacity-70 disabled:cursor-not-allowed"
-                        >
-                            {isSubmitting ? (
-                                "Sending..."
-                            ) : isSuccess ? (
-                                "Message Sent!"
-                            ) : (
-                                <>
-                                    <Send size={20} />
-                                    Send Message
-                                </>
+                                {isSubmitting ? (
+                                    "Sending..."
+                                ) : isSuccess ? (
+                                    "Message Sent!"
+                                ) : (
+                                    <>
+                                        Send Message <Send size={20} />
+                                    </>
+                                )}
+                            </button>
+                            {isSuccess && (
+                                <p className="text-center text-green-400 mt-4 font-medium animate-pulse">
+                                    Thank you! Your message has been sent successfully.
+                                </p>
                             )}
-                        </button>
-                        {isSuccess && (
-                            <p className="text-center text-green-500 mt-4">
-                                Thank you! Your message has been sent successfully.
-                            </p>
-                        )}
-                    </form>
+                        </form>
+                    </div>
 
-                    <div className="mt-16 text-center">
-                        <h3 className="text-lg font-semibold text-foreground mb-6">
-                            Or find me on
+                    <div className="mt-20 text-center">
+                        <h3 className="text-xl font-medium text-white mb-8">
+                            Or connect with me on social media
                         </h3>
-                        <div className="flex justify-center gap-6">
-                            <a
-                                href="https://www.instagram.com/muhammeed_elsayedd?igsh=MTBqZTZxZzY1eTg2OQ%3D%3D&utm_source=qr"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="p-4 bg-card border border-border rounded-xl text-muted-foreground hover:text-primary hover:border-primary hover:scale-110 hover:-translate-y-1 transition-all"
-                            >
-                                <FaInstagram size={24} />
-                            </a>
-                            <a
-                                href="https://www.facebook.com/share/1bkE9NYpDa/?mibextid=wwXIfr"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="p-4 bg-card border border-border rounded-xl text-muted-foreground hover:text-primary hover:border-primary hover:scale-110 hover:-translate-y-1 transition-all"
-                            >
-                                <FaFacebook size={24} />
-                            </a>
-                            <a
-                                href="https://wa.me/201284660741"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="p-4 bg-card border border-border rounded-xl text-muted-foreground hover:text-primary hover:border-primary hover:scale-110 hover:-translate-y-1 transition-all"
-                            >
-                                <FaWhatsapp size={24} />
-                            </a>
+                        <div className="flex justify-center gap-8">
+                            {[
+                                { icon: FaInstagram, href: "https://www.instagram.com/muhammeed_elsayedd?igsh=MTBqZTZxZzY1eTg2OQ%3D%3D&utm_source=qr", color: "hover:text-pink-500" },
+                                { icon: FaFacebook, href: "https://www.facebook.com/share/1bkE9NYpDa/?mibextid=wwXIfr", color: "hover:text-blue-500" },
+                                { icon: FaWhatsapp, href: "https://wa.me/201284660741", color: "hover:text-green-500" }
+                            ].map((social, index) => (
+                                <a
+                                    key={index}
+                                    href={social.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className={`p-5 glass rounded-full text-gray-400 ${social.color} hover:bg-white/10 hover:scale-110 hover:-translate-y-2 transition-all duration-300 border border-white/5 hover:border-white/20`}
+                                >
+                                    <social.icon size={28} />
+                                </a>
+                            ))}
                         </div>
                     </div>
                 </div>
