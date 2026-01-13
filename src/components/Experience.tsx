@@ -6,6 +6,17 @@ import { Briefcase } from "lucide-react";
 const experiences = [
     {
         title: "Team Leader & Branch Store Manager",
+        company: "Comedya Store, Egypt",
+        period: "2023 – Jan 2026",
+        description: [
+            "Led and motivated teams to achieve outstanding sales targets.",
+            "Developed innovative strategies to enhance customer engagement and satisfaction.",
+            "Monitored store operations, ensuring efficiency and compliance with policies.",
+            "Analyzed sales data to drive growth and improve performance.",
+        ],
+    },
+    {
+        title: "Team Leader & Branch Store Manager",
         company: "Van Dutti, Egypt",
         period: "2021 – Jan 2023",
         description: [
