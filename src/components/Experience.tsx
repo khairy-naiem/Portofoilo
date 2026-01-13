@@ -8,12 +8,14 @@ const experiences = [
         title: "Team Leader & Branch Store Manager",
         company: "Comedya Store, Egypt",
         period: "2023 – Jan 2026",
-        description: [
-            "Led and motivated teams to achieve outstanding sales targets.",
-            "Developed innovative strategies to enhance customer engagement and satisfaction.",
-            "Monitored store operations, ensuring efficiency and compliance with policies.",
-            "Analyzed sales data to drive growth and improve performance.",
-        ],
+       description: [
+  "Managed daily operations of a mobile retail branch, ensuring smooth workflow and high service quality.",
+  "Led and trained the sales team to achieve monthly targets and improve performance.",
+  "Assisted customers in choosing smartphones, accessories, and services based on their needs.",
+  "Handled inventory management, stock ordering, and loss prevention.",
+  "Resolved customer issues professionally, increasing satisfaction and repeat business.",
+  "Tracked sales and prepared reports to support business growth and decision-making.",
+],
     },
     {
         title: "Team Leader & Branch Store Manager",
